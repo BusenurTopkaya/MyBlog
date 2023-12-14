@@ -1,0 +1,64 @@
+﻿@model Note
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <div class="container">
+        <h2>Not Düzenle</h2>
+        <br />
+
+        @*enctype="multipart/form-data" : upload için seçmemiz gerekiyor, aksi halde dosyamız gitmez*@
+        <form asp-controller="Note" asp-action="Edit" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" asp-for="NoteId" />
+            <input type="hidden" asp-for="Image" />
+
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Body"></label>
+                <input asp-for="Body" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                @*<label>Image</label>*@
+                <img src="~/img/@Model.Image" width="150"/>
+                <input type="file" name="file" id="file" class="form-control" />
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input asp-for="isApproved" type="checkbox" class="custom-control-input">
+                <label asp-for="isApproved" class="custom-control-label">Yayınlamak için onaylıyor musun?</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input asp-for="isHome" type="checkbox" class="custom-control-input">
+                <label asp-for="isHome" class="custom-control-label">Anasayfa da yayınlansın mı?</label>
+            </div>
+
+            <div class="custom-control custom-checkbox">
+                <input asp-for="isSlider" type="checkbox" class="custom-control-input">
+                <label asp-for="isSlider" class="custom-control-label">Slider da gösterilsin mi</label>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Categories">
+                    <option disabled selected value="">Lütfen Seçiniz..</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">Kaydet</button>
+
+        </form>
+
+    </div>
+
